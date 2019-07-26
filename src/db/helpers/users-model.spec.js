@@ -44,6 +44,18 @@ describe('User Model helper functions Test suite', () => {
     });
   });
 
+  describe('getByEmail(email) Test suite', () => {
+    it('Should get a single user by email', async () => {
+      const user = await User.getByEmail(createdUser.email);
+
+      expect(user).toMatchObject({
+        first_name: 'Fake',
+        last_name: 'AllFake',
+        email: 'fake@yahoo.com',
+      });
+    });
+  });
+
   describe('update(id, changes) Test suite', () => {
     let newDetails = {};
 
