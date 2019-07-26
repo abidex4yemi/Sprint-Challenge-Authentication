@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../../models');
-const { createError, UNAUTHORIZED, GENERIC_ERROR } = require('../../util/error.js');
+const {
+  createError, UNAUTHORIZED, GENERIC_ERROR, BAD_REQUEST,
+} = require('../../util/error.js');
 
 /**
    * Verifies user provided token
@@ -28,15 +30,6 @@ const verifyToken = async (req, res, next) => {
     // verify user provided token against existing token
     const decoded = jwt.verify(token, secretKey);
 
-    if (decoded.err && decoded.err.name === 'TokenExpiredError') {
-      return next(
-        createError({
-          status: UNAUTHORIZED,
-          error: 'Token expired, login again.',
-        }),
-      );
-    }
-
     const user = await User.getById(decoded.id);
 
     // check for valid app users
@@ -54,6 +47,15 @@ const verifyToken = async (req, res, next) => {
 
     return next();
   } catch (errors) {
+    if (errors.name && errors.name === 'TokenExpiredError') {
+      return next(
+        createError({
+          status: BAD_REQUEST,
+          message: 'Token expired, login again.',
+        }),
+      );
+    }
+
     return next(
       createError({
         message: 'Could not verify token',
