@@ -49,6 +49,9 @@ const login = async (req, res, next) => {
 
     const token = generateToken(payload, options);
 
+    // Remove user password from user object
+    delete user.password;
+
     return res.status(OK).json(
       createSuccess({
         message: 'Log in successful',
