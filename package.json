@@ -7,7 +7,7 @@
     "db:migrate": "npx knex migrate:latest --knexfile=./src/knexfile.js",
     "db:seed": "npx knex seed:run  --knexfile=./src/knexfile.js",
     "start": "npm run prod",
-    "test": "jest DB_ENV=test --watchAll --verbose",
+    "test": "jest --watchAll --verbose",
     "server": "node ./src/server/start.js",
     "server:prod": "node ./src/server/start.js",
     "dev": "NODE_ENV=development npm-run-all server",
@@ -46,6 +46,8 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
-    "nodemon": "^1.19.1"
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
