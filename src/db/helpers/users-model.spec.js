@@ -62,4 +62,12 @@ describe('User Model helper functions Test suite', () => {
       expect(updatedUserDetails).toMatchObject(newDetails);
     });
   });
+
+  describe('remove(id) Test suite', () => {
+    it('Should delete a user given the id is valid', async () => {
+      const deletedRows = await User.remove(createdUser.id);
+
+      expect(deletedRows).toBe(1);
+    });
+  });
 });
