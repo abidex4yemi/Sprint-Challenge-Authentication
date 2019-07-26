@@ -4,7 +4,15 @@
   "description": "Authentication Sprint Challenge",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js"
+    "db:migrate": "npx knex migrate:latest --knexfile=./src/knexfile.js",
+    "db:seed": "npx knex seed:run  --knexfile=./src/knexfile.js",
+    "start": "npm run prod",
+    "test": "jest DB_ENV=test --watchAll --verbose",
+    "server": "node ./src/server/start.js",
+    "server:prod": "node ./src/server/start.js",
+    "dev": "NODE_ENV=development npm-run-all server",
+    "prod": "NODE_ENV=production npm-run-all server:prod",
+    "watch": "nodemon"
   },
   "repository": {
     "type": "git",
