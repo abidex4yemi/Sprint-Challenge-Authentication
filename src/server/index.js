@@ -10,6 +10,7 @@ const cors = require('cors');
 const allErrorHandler = require('./middleware/errors');
 const { createSuccess, OK } = require('./util/success');
 const { NOT_FOUND } = require('./util/error');
+const userRouter = require('./routes/userRouter');
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use(logger('dev'));
 app.use(helmet());
 
 app.get('/', (req, res) => res.status(OK).json(createSuccess({ message: 'API is alive...', data: [] })));
+
+app.use('/api/v1/auth', userRouter);
 
 // Handle invalid request
 app.all('*', (req, res) => res.status(NOT_FOUND).json({

@@ -11,7 +11,7 @@ const create = (knex) => {
       .then((user) => {
         // eslint-disable-next-line no-param-reassign
         delete user[0].password;
-        return user;
+        return user[0];
       });
   }
 
