@@ -7,11 +7,11 @@
     "db:migrate": "npx knex migrate:latest --knexfile=./src/knexfile.js",
     "db:seed": "npx knex seed:run  --knexfile=./src/knexfile.js",
     "start": "npm run prod",
-    "test": "jest --watchAll --verbose",
+    "test": "cross-env DB_ENV=test jest --watchAll --verbose",
     "server": "node ./src/server/start.js",
     "server:prod": "node ./src/server/start.js",
-    "dev": "NODE_ENV=development npm-run-all server",
-    "prod": "NODE_ENV=production npm-run-all server:prod",
+    "dev": "cross-env NODE_ENV=development npm-run-all server",
+    "prod": "cross-env NODE_ENV=production npm-run-all server:prod",
     "watch": "nodemon"
   },
   "repository": {
@@ -40,6 +40,7 @@
     "sqlite3": "^4.0.8"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
