@@ -24,7 +24,7 @@ const createUser = async (req, res, next) => {
     };
 
     const options = {
-      expiresIn: '1h',
+      expiresIn: '24h',
     };
 
     const token = generateToken(payload, options);

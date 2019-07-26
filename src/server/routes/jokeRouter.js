@@ -1,5 +1,5 @@
 const express = require('express');
-const { getJokes, getJokeById } = require('../controllers/jokes');
+const { getJokes, getJokeById, deleteJokeById } = require('../controllers/jokes');
 const { validateJokeParameter } = require('../middleware/joke');
 const verifyToken = require('../middleware/auth/verifyToken');
 
@@ -14,6 +14,7 @@ router
 router
   .route('/jokes/:id')
   .all(verifyToken)
-  .get(getJokeById);
+  .get(getJokeById)
+  .delete(deleteJokeById);
 
 module.exports = router;
