@@ -1,31 +1,34 @@
 const { Joke } = require('../../models');
 const { createError, GENERIC_ERROR } = require('../../util/error');
-const { OK, createSuccess } = require('../../util/success');
+const { createSuccess, OK } = require('../../util/success');
 
 /**
- * Get joke by id provided the id is valid
+ * Delete joke by id given the joke id is valid
  *
  * @param {*} req
  * @param {*} res
  * @param {*} next
  */
-const getJokeById = async (req, res, next) => {
+const deleteJokeById = async (req, res, next) => {
   try {
     const { joke } = req;
+
+    await Joke.remove(joke.id);
 
     return res.status(OK).json(
       createSuccess({
         data: joke,
+        message: 'Joke deleted',
       }),
     );
   } catch (error) {
     return next(
       createError({
-        message: 'Could not get joke with specified id',
+        message: 'Could delete joke with the given id',
         status: GENERIC_ERROR,
       }),
     );
   }
 };
 
-module.exports = getJokeById;
+module.exports = deleteJokeById;

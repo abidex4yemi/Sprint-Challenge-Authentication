@@ -4,7 +4,6 @@ const { validateJokeParameter } = require('../middleware/joke');
 const verifyToken = require('../middleware/auth/verifyToken');
 
 const router = express.Router();
-
 router.param('id', validateJokeParameter);
 
 router
