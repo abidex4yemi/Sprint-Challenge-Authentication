@@ -15,9 +15,9 @@ const create = (knex) => {
       .first();
   }
 
-  function insert(department) {
+  function insert(joke) {
     return knex('jokes')
-      .insert(department)
+      .insert(joke)
       .then(([id]) => getById(id));
   }
 
@@ -34,7 +34,7 @@ const create = (knex) => {
       .del();
   }
 
-  // Department is the model name
+  // joke is the model name
   return {
     name: 'Joke',
     getById,
