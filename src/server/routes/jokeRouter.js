@@ -1,9 +1,20 @@
 const express = require('express');
-const { getJokes } = require('../controllers/jokes');
+const { getJokes, getJokeById } = require('../controllers/jokes');
+const { validateJokeParameter } = require('../middleware/joke');
 const verifyToken = require('../middleware/auth/verifyToken');
 
 const router = express.Router();
 
-router.route('/jokes').get(verifyToken, getJokes);
+router.param('id', validateJokeParameter);
+
+router
+  .route('/jokes')
+  .all(verifyToken)
+  .get(getJokes);
+
+router
+  .route('/jokes/:id')
+  .all(verifyToken)
+  .get(getJokeById);
 
 module.exports = router;
